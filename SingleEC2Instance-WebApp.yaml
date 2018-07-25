@@ -575,12 +575,8 @@ Resources:
               content: !Join 
                 - |+
 
-                - - <img src="
-                  - !FindInMap 
-                    - Region2Examples
-                    - !Ref 'AWS::Region'
-                    - Examples
-                  - /cloudformation_graphic.png" alt="AWS CloudFormation Logo"/>
+                - - <img src="https://www.globalservices.bt.com/static/assets/gswuplift/images/icons/globalheader_bt_logo.png·
+                  - alt="BT Logo"/>
                   - >-
                     <h1>Congratulations, you have successfully launched the BT-ORT-WebApp!
                     </h1>
