@@ -569,7 +569,7 @@ Resources:
         InstancePort: '80'
         Protocol: HTTP
       HealthCheck:
-        Target: HTTP:80/index.html
+        Target: HTTP:80/iisstart.htm
         HealthyThreshold: '3'
         UnhealthyThreshold: '5'
         Interval: '30'
