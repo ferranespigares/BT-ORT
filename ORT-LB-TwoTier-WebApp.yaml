@@ -428,12 +428,16 @@ Resources:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
       VpcId: !Ref VPC
-      GroupDescription: Enable HTTPS access via port 443
+      GroupDescription: Enable HTTPS access via port 80
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: '443'
-          ToPort: '443'
+          FromPort: '80'
+          ToPort: '80'
           CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '3389'
+          ToPort: '3389'
+          CidrIp: !Ref SSHLocation
   DatabaseSG:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
@@ -444,6 +448,18 @@ Resources:
           FromPort: '1433'
           ToPort: '1433'
           CidrIp: 10.0.100.0/25
+  IPAddress1:
+    Type: 'AWS::EC2::EIP'
+    DependsOn: AttachGateway
+    Properties:
+      Domain: vpc
+      InstanceId: !Ref WebServerInstance1
+  IPAddress2:
+    Type: 'AWS::EC2::EIP'
+    DependsOn: AttachGateway
+    Properties:
+      Domain: vpc
+      InstanceId: !Ref WebServerInstance2
   WebServerInstance1:
     Type: 'AWS::EC2::Instance'
     DependsOn: AttachGateway
