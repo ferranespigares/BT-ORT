@@ -8,3 +8,4 @@ Destroy with:
 ```
 aws cloudformation delete-stack --stack-name bt-ort-v8
 ```
+(C)2018 Ferran Espigares
