@@ -456,6 +456,21 @@ Resources:
           FromPort: '-1'
           ToPort: '-1'
           CidrIp: 10.0.100.0/25
+  LoadBalancerSG:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      VpcId: !Ref VPC
+      GroupDescription: Enable HTTPS access via port 80
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          DestinationSecurityGroupId: !Ref WebServerSG
   IPAddress1:
     Type: 'AWS::EC2::EIP'
     DependsOn: AttachGateway
@@ -561,6 +576,8 @@ Resources:
         Timeout: '5'
       Subnets:
       - Ref: PublicSubnet
+      SecurityGroups:
+      - Ref: LoadBalancerSG
 Outputs:
   URL1:
     Value: !Join 
@@ -568,7 +585,7 @@ Outputs:
       - - 'http://'
         - !GetAtt 
           - WebServerInstance1
-          - PrivateIp
+          - PublicIp
     Description: WevServer1 Priavet IP
   URL2:
     Value: !Join 
@@ -576,7 +593,7 @@ Outputs:
       - - 'http://'
         - !GetAtt 
           - WebServerInstance2
-          - PrivateIp
+          - PublicIp
     Description: WevServer2 Private IP
   URL3:
     Value: !Join 
