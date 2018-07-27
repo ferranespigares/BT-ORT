@@ -448,6 +448,14 @@ Resources:
           FromPort: '1433'
           ToPort: '1433'
           CidrIp: 10.0.100.0/25
+        - IpProtocol: tcp
+          FromPort: '3389'
+          ToPort: '3389'
+          CidrIp: 10.0.100.0/25
+        - IpProtocol: icmp
+          FromPort: '-1'
+          ToPort: '-1'
+          CidrIp: 10.0.100.0/25
   IPAddress1:
     Type: 'AWS::EC2::EIP'
     DependsOn: AttachGateway
