@@ -586,7 +586,7 @@ Outputs:
         - !GetAtt 
           - WebServerInstance1
           - PublicIp
-    Description: WevServer1 Priavet IP
+    Description: WevServer1 Public IP
   URL2:
     Value: !Join 
       - ''
@@ -594,7 +594,7 @@ Outputs:
         - !GetAtt 
           - WebServerInstance2
           - PublicIp
-    Description: WevServer2 Private IP
+    Description: WevServer2 Public IP
   URL3:
     Value: !Join 
       - ''
