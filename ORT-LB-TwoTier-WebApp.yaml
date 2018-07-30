@@ -578,6 +578,51 @@ Resources:
       - Ref: PublicSubnet
       SecurityGroups:
       - Ref: LoadBalancerSG
+  EBSVolume1:
+    Type: AWS::EC2::Volume
+    Properties:
+      AutoEnableIO: 'true'
+      VolumeType: gp2
+      Size: 60
+      Encrypted: false
+      AvailabilityZone: !GetAtt WebServerInstance1.AvailabilityZone
+    DeletionPolicy: Delete
+  EBSVolume1Attach:
+    Type: AWS::EC2::VolumeAttachment
+    Properties:
+      InstanceId: !Ref WebServerInstance1
+      VolumeId: !Ref EBSVolume1
+      Device: '/dev/sdh'
+  EBSVolume2:
+    Type: AWS::EC2::Volume
+    Properties:
+      AutoEnableIO: 'true'
+      VolumeType: gp2
+      Size: 60
+      Encrypted: false
+      AvailabilityZone: !GetAtt WebServerInstance2.AvailabilityZone
+    DeletionPolicy: Delete
+  EBSVolume2Attach:
+    Type: AWS::EC2::VolumeAttachment
+    Properties:
+      InstanceId: !Ref WebServerInstance2
+      VolumeId: !Ref EBSVolume2
+      Device: '/dev/sdh'
+  EBSVolume3:
+    Type: AWS::EC2::Volume
+    Properties:
+      AutoEnableIO: 'true'
+      VolumeType: gp2
+      Size: 60
+      Encrypted: false
+      AvailabilityZone: !GetAtt DatabaseInstance.AvailabilityZone
+    DeletionPolicy: Delete
+  EBSVolume3Attach:
+    Type: AWS::EC2::VolumeAttachment
+    Properties:
+      InstanceId: !Ref DatabaseInstance
+      VolumeId: !Ref EBSVolume3
+      Device: '/dev/sdh'
 Outputs:
   URL1:
     Value: !Join 
